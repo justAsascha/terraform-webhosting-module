@@ -15,6 +15,10 @@ The module should:
 - Testing is encouraged.
 - Please provide the code in a publicly accessible git repository.
 
+# Live Demo
+SPA: https://test.justagency.de/
+
+static image: https://test.justagency.de/statics/handsomeguy.png
 
 # How To Run
 
