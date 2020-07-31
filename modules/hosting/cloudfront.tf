@@ -49,6 +49,27 @@ resource "aws_cloudfront_distribution" "hosting" {
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
+    target_origin_id = local.webapp_s3_origin_id
+
+    viewer_protocol_policy = "redirect-to-https"
+
+    min_ttl     = 86400
+    default_ttl = 86400
+    max_ttl     = 86400
+
+    forwarded_values {
+      query_string = true
+
+      cookies {
+        forward = "none"
+      }
+    }
+  }
+
+  ordered_cache_behavior {
+    path_pattern     = "/statics/*"
+    allowed_methods  = ["GET", "HEAD"]
+    cached_methods   = ["GET", "HEAD"]
     target_origin_id = local.static_s3_origin_id
 
     viewer_protocol_policy = "redirect-to-https"
