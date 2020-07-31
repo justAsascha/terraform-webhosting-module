@@ -1,4 +1,4 @@
-# epilot challenge descrption
+# epilot challenge description
 
 Write a terraform module to distribute static content from one bucket for /static/ paths, and as default to serve a simple 'hello-world' javascript SPA application from a different bucket. Make sure that the distribution is only accessible for certain IP ranges.
 
