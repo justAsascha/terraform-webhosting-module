@@ -26,7 +26,7 @@ data "aws_iam_policy_document" "bucket_policy" {
 module "static_content_s3" {
   source = "terraform-aws-modules/s3-bucket/aws"
 
-  bucket        = "${var.static_content_bucket_name}_${var.env}"
+  bucket        = "${var.static_content_bucket_name}-${var.env}"
   acl           = "private"
   force_destroy = true
   attach_policy = true

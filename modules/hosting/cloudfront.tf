@@ -1,4 +1,3 @@
-
 ##############
 # CloudFront #
 ##############
@@ -7,7 +6,7 @@ locals {
 }
 
 resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
-  comment = "Static Content - (${var.env})"
+  comment = "Static Content - ${var.env}"
 }
 
 resource "aws_cloudfront_distribution" "hosting" {
@@ -20,7 +19,7 @@ resource "aws_cloudfront_distribution" "hosting" {
     }
   }
 
-  aliases = [var.static_dns_name]
+  aliases = [var.dns_address]
 
   enabled             = true
   is_ipv6_enabled     = true
@@ -36,12 +35,11 @@ resource "aws_cloudfront_distribution" "hosting" {
   }
 
   default_cache_behavior {
-    allowed_methods  = ["GET"]
-    cached_methods   = ["GET"]
+    allowed_methods  = ["GET", "HEAD"]
+    cached_methods   = ["GET", "HEAD"]
     target_origin_id = local.static_s3_origin_id
 
-    # viewer_protocol_policy = "redirect-to-https"
-    viewer_protocol_policy = "allow-all"
+    viewer_protocol_policy = "redirect-to-https"
 
     min_ttl     = 86400
     default_ttl = 86400
@@ -57,19 +55,15 @@ resource "aws_cloudfront_distribution" "hosting" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn      = aws_acm_certificate.certificate.arn
+    minimum_protocol_version = "TLSv1"
+    ssl_support_method       = "sni-only"
   }
-
-  #   viewer_certificate {
-  #     acm_certificate_arn      = aws_acm_certificate.certificate.arn
-  #     minimum_protocol_version = "TLSv1"
-  #     ssl_support_method       = "sni-only"
-  #   }
 
   tags = {
     Environment = var.env
     Service     = var.service_name
   }
 
-  #   depends_on = [aws_acm_certificate.certificate]
+  depends_on = [aws_acm_certificate.certificate]
 }

@@ -16,6 +16,10 @@ variable "static_content_bucket_name" {
   description = "The name of the s3 bucket for static content."
 }
 
-variable "static_dns_name" {
-  description = "The dns name for static content"
+variable "hosted_zone" {
+  description = "Name of hosted zone. (e.g. 'yourdns.tld.')"
+}
+
+variable "dns_address" {
+  description = "DNS address to access web content."
 }
