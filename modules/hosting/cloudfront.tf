@@ -36,9 +36,9 @@ resource "aws_cloudfront_distribution" "hosting" {
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"
-  price_class         = "PriceClass_100"
+  price_class         = var.cloudfront_price_class
 
-  #   web_acl_id = aws_waf_web_acl.waf_acl.id
+  web_acl_id = aws_waf_web_acl.waf_acl.id
 
   restrictions {
     geo_restriction {

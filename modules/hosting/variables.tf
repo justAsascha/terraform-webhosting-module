@@ -27,3 +27,15 @@ variable "dns_address" {
 variable "webapp_bucket_name" {
   description = "The name of the s3 bucket for single page application files."
 }
+
+variable "cloudfront_price_class" {
+  description = "Cloudfront price class"
+}
+
+variable "whitelisted_cdirs" {
+  description = "List of whitelisted CDIRs"
+  type = list(object({
+    value = string
+    type  = string
+  }))
+}
