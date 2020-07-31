@@ -11,6 +11,6 @@ The module should:
 - IP protection implemented as desired.
 - (Bonus): implement basic authentication protection for the distribution. (Can be a static username + password)
 
-Please document the functionality and how to run the application to the best of your ability in the README.md.
-Testing is encouraged.
-Please provide the code in a publicly accessible git repository.
+- Please document the functionality and how to run the application to the best of your ability in the README.md.
+- Testing is encouraged.
+- Please provide the code in a publicly accessible git repository.
