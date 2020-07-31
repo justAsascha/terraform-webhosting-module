@@ -23,3 +23,7 @@ variable "hosted_zone" {
 variable "dns_address" {
   description = "DNS address to access web content."
 }
+
+variable "webapp_bucket_name" {
+  description = "The name of the s3 bucket for single page application files."
+}

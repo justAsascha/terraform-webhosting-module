@@ -2,7 +2,8 @@
 # CloudFront #
 ##############
 locals {
-  static_s3_origin_id = "static-s3-${var.env}"
+  static_s3_origin_id = "s3-origin-id-${var.static_content_bucket_name}"
+  webapp_s3_origin_id = "s3-origin-id-${var.webapp_bucket_name}"
 }
 
 resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
@@ -10,6 +11,17 @@ resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
 }
 
 resource "aws_cloudfront_distribution" "hosting" {
+  # single page application
+  origin {
+    domain_name = module.webapp_s3.this_s3_bucket_bucket_regional_domain_name
+    origin_id   = local.webapp_s3_origin_id
+
+    s3_origin_config {
+      origin_access_identity = aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path
+    }
+  }
+
+  # static files
   origin {
     domain_name = module.static_content_s3.this_s3_bucket_bucket_regional_domain_name
     origin_id   = local.static_s3_origin_id
