@@ -2,13 +2,13 @@
 # WAF #
 #######
 locals {
-  cf_waf_name = "WhitelistSpecifIps${var.env}"
+  cf_waf_name = "allowlistSpecifIps${var.env}"
 }
 
 resource "aws_waf_ipset" "ipset" {
   name = "tfIPSet"
   dynamic "ip_set_descriptors" {
-    for_each = var.whitelisted_cdirs
+    for_each = var.allowlist_cdirs
     content {
       value = ip_set_descriptors.value.value
       type  = ip_set_descriptors.value.type

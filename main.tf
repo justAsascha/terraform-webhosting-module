@@ -17,12 +17,14 @@ variable "region" {
   default = "eu-west-1"
 }
 
+#################
+# TEST ACM CERT #
+#################
 resource "aws_acm_certificate" "certificate" {
   provider          = aws.useast1
   domain_name       = "test.justagency.de"
   validation_method = "DNS"
 }
-
 
 resource "aws_route53_record" "cert_validation" {
   zone_id = "Z0800165I302K1PHD4DT"
@@ -57,7 +59,10 @@ module "hosting" {
   cloudfront_price_class = "PriceClass_100"
   acm_certificate_arn    = aws_acm_certificate.certificate.arn
 
-  whitelisted_cdirs = [
-    { value = "0.0.0.0/0", type = "IPV4" },
+  basic_auth_username = "demo"
+  basic_auth_password = "secret"
+
+  allowlist_cdirs = [
+    { value = "5.146.105.103/32", type = "IPV4" },
   ]
 }
