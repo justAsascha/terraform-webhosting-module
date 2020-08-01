@@ -12,7 +12,7 @@ variable "hosted_zone" {
 }
 
 variable "dns_address" {
-  description = "DNS address to access web content."
+  description = "DNS address for web content."
 }
 
 variable "webapp_bucket_name" {
