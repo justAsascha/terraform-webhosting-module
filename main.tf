@@ -10,11 +10,7 @@ provider "aws" {
 
 provider "aws" {
   version = "~> 2.35"
-  region  = var.region
-}
-
-variable "region" {
-  default = "eu-west-1"
+  region  = "eu-west-1"
 }
 
 #################
@@ -47,7 +43,7 @@ resource "aws_acm_certificate_validation" "cert" {
 ##################
 module "hosting" {
   source       = "./modules/hosting"
-  region       = var.region
+  region       = "eu-west-1"
   env          = "production"
   service_name = "hosting"
 
