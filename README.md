@@ -40,5 +40,3 @@ https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/SOA-NSrecords.html
 I would highly recommend to use an exsisting hosted zone within a module and keep generation of hosted zones isolated, because they need longer provisioning time due to DNS propagination.
 
 I've added /dist folder of the angular SPA application. This is just for demo purpose, so you guys won't need to install nodejs locally.
-
-Wouldn't it make more sense, to create a ACM Certificate within the module, because it requires the generated zone?

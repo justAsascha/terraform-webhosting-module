@@ -32,6 +32,10 @@ variable "cloudfront_price_class" {
   description = "Cloudfront price class"
 }
 
+variable "acm_certificate_arn" {
+  description = "ARN of ACM Certificate"
+}
+
 variable "whitelisted_cdirs" {
   description = "List of whitelisted CDIRs"
   type = list(object({
