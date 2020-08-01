@@ -2,7 +2,7 @@
 # WAF #
 #######
 locals {
-  cf_waf_name = "allowlistSpecifIps${var.env}"
+  cf_waf_name = "allowlistSpecifIps"
 }
 
 resource "aws_waf_ipset" "ipset" {

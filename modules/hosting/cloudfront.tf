@@ -7,7 +7,7 @@ locals {
 }
 
 resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
-  comment = "Static Content - ${var.env}"
+  comment = "Static Content"
 }
 
 resource "aws_cloudfront_distribution" "hosting" {

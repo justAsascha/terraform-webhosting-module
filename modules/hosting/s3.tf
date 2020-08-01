@@ -35,11 +35,6 @@ module "static_content_s3" {
   versioning = {
     enabled = false
   }
-
-  tags = {
-    Environment = var.env
-    Service     = var.service_name
-  }
 }
 
 #################################
@@ -83,10 +78,5 @@ module "webapp_s3" {
 
   versioning = {
     enabled = false
-  }
-
-  tags = {
-    Environment = var.env
-    Service     = var.service_name
   }
 }

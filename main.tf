@@ -44,8 +44,6 @@ resource "aws_acm_certificate_validation" "cert" {
 module "hosting" {
   source       = "./modules/hosting"
   region       = "eu-west-1"
-  env          = "production"
-  service_name = "hosting"
 
   static_content_bucket_name = "epilot-statics-demo"
   webapp_bucket_name         = "epilot-webapp-demo"
