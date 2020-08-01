@@ -64,6 +64,11 @@ resource "aws_cloudfront_distribution" "hosting" {
         forward = "none"
       }
     }
+
+    lambda_function_association {
+      event_type = "origin-request"
+      lambda_arn = aws_lambda_function.lambda_edge.qualified_arn
+    }
   }
 
   ordered_cache_behavior {

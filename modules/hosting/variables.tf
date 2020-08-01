@@ -36,8 +36,16 @@ variable "acm_certificate_arn" {
   description = "ARN of ACM Certificate"
 }
 
-variable "whitelisted_cdirs" {
-  description = "List of whitelisted CDIRs"
+variable "basic_auth_username" {
+  description = "Basic Auth Username"
+}
+
+variable "basic_auth_password" {
+  description = "Basic Auth secret"
+}
+
+variable "allowlist_cdirs" {
+  description = "List of allowlisted CDIRs"
   type = list(object({
     value = string
     type  = string
