@@ -47,27 +47,29 @@ resource "aws_cloudfront_distribution" "hosting" {
   }
 
   default_cache_behavior {
-    allowed_methods  = ["GET", "HEAD"]
+    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = local.webapp_s3_origin_id
 
     viewer_protocol_policy = "redirect-to-https"
 
-    min_ttl     = 86400
-    default_ttl = 86400
-    max_ttl     = 86400
-
     forwarded_values {
       query_string = true
-
+      headers = [
+        "Origin",
+        "Access-Control-Request-Headers",
+        "Access-Control-Request-Method",
+        "Authorization",
+      ]
       cookies {
         forward = "none"
       }
     }
 
     lambda_function_association {
-      event_type = "origin-request"
-      lambda_arn = aws_lambda_function.lambda_edge.qualified_arn
+      event_type   = "origin-request"
+      lambda_arn   = aws_lambda_function.lambda_edge.qualified_arn
+      include_body = true
     }
   }
 
@@ -78,10 +80,6 @@ resource "aws_cloudfront_distribution" "hosting" {
     target_origin_id = local.static_s3_origin_id
 
     viewer_protocol_policy = "redirect-to-https"
-
-    min_ttl     = 86400
-    default_ttl = 86400
-    max_ttl     = 86400
 
     forwarded_values {
       query_string = true

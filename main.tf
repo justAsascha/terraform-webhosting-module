@@ -38,9 +38,9 @@ resource "aws_acm_certificate_validation" "cert" {
   validation_record_fqdns = [aws_route53_record.cert_validation.fqdn]
 }
 
-##################
-# DEMO SHOWCASE  #
-##################
+#################
+# DEMO SHOWCASE #
+#################
 module "hosting" {
   source       = "./modules/hosting"
   region       = "eu-west-1"
@@ -61,4 +61,24 @@ module "hosting" {
   allowlist_cdirs = [
     { value = "5.146.105.103/32", type = "IPV4" },
   ]
+}
+
+output "cloudfront_id" {
+  value = module.hosting.cloudfront_id
+}
+
+output "lambda_edge_arn" {
+  value = module.hosting.lambda_edge_arn
+}
+
+output "webapp_s3_arn" {
+  value = module.hosting.webapp_s3_arn
+}
+
+output "static_s3_arn" {
+  value = module.hosting.static_s3_arn
+}
+
+output "hosted_zone_id" {
+  value = module.hosting.hosted_zone_id
 }
