@@ -55,7 +55,9 @@ https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/SOA-NSrecords.html
 
 # Testing
 I've used terratest for testing (https://terratest.gruntwork.io/)
+
 `$ cd test`
+
 `$ go test -v -timeout 30m`
 
 # Notes
