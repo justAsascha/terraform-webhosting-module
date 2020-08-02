@@ -8,35 +8,35 @@ provider "aws" {
   region = "us-east-1"
 }
 
-provider "aws" {
-  version = "~> 2.35"
-  region  = "eu-west-1"
-}
+# provider "aws" {
+#   version = "~> 2.35"
+#   region  = "eu-west-1"
+# }
 
 #################
 # TEST ACM CERT #
 #################
-resource "aws_acm_certificate" "certificate" {
-  provider          = aws.useast1
-  domain_name       = "test.justagency.de"
-  validation_method = "DNS"
-}
+# resource "aws_acm_certificate" "certificate" {
+#   provider          = aws.useast1
+#   domain_name       = "test.justagency.de"
+#   validation_method = "DNS"
+# }
 
-resource "aws_route53_record" "cert_validation" {
-  zone_id = "Z0800165I302K1PHD4DT"
-  name    = aws_acm_certificate.certificate.domain_validation_options.0.resource_record_name
-  type    = aws_acm_certificate.certificate.domain_validation_options.0.resource_record_type
-  records = [aws_acm_certificate.certificate.domain_validation_options.0.resource_record_value]
+# resource "aws_route53_record" "cert_validation" {
+#   zone_id = "Z0800165I302K1PHD4DT"
+#   name    = aws_acm_certificate.certificate.domain_validation_options.0.resource_record_name
+#   type    = aws_acm_certificate.certificate.domain_validation_options.0.resource_record_type
+#   records = [aws_acm_certificate.certificate.domain_validation_options.0.resource_record_value]
 
-  ttl             = 60
-  allow_overwrite = true
-}
+#   ttl             = 60
+#   allow_overwrite = true
+# }
 
-resource "aws_acm_certificate_validation" "cert" {
-  provider                = aws.useast1
-  certificate_arn         = aws_acm_certificate.certificate.arn
-  validation_record_fqdns = [aws_route53_record.cert_validation.fqdn]
-}
+# resource "aws_acm_certificate_validation" "cert" {
+#   provider                = aws.useast1
+#   certificate_arn         = aws_acm_certificate.certificate.arn
+#   validation_record_fqdns = [aws_route53_record.cert_validation.fqdn]
+# }
 
 #################
 # DEMO SHOWCASE #
@@ -49,9 +49,9 @@ module "hosting" {
   webapp_bucket_name         = "epilot-webapp-demo"
 
   hosted_zone            = "justagency.de."
-  dns_address            = "test.justagency.de"
+  dns_address            = "justagency.de"
   cloudfront_price_class = "PriceClass_100"
-  acm_certificate_arn    = aws_acm_certificate.certificate.arn
+  acm_certificate_arn    = "arn:aws:acm:us-east-1:483794430365:certificate/da3809c2-e943-463d-9af9-542411678b8f"
 
   basic_auth_username = "demo"
   basic_auth_password = "secret"
