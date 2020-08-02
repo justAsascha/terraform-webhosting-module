@@ -51,7 +51,7 @@ module "hosting" {
   hosted_zone            = "justagency.de."
   dns_address            = "justagency.de"
   cloudfront_price_class = "PriceClass_100"
-  acm_certificate_arn    = "arn:aws:acm:us-east-1:483794430365:certificate/da3809c2-e943-463d-9af9-542411678b8f"
+  acm_certificate_arn    = "arn:aws:acm:us-east-1:xxxxxxx:certificate/xxxxxxxx"
 
   basic_auth_username = "demo"
   basic_auth_password = "secret"
