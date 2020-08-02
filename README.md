@@ -20,6 +20,10 @@ SPA: https://justagency.de/
 
 static image: https://justagency.de/static/handsomeguy.png
 
+Username: `demo`
+
+Password: `secret` 
+
 # Requirements
 
 - Go (requires version >=1.13) for terratest
