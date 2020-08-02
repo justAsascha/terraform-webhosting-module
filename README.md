@@ -16,9 +16,9 @@ The module should:
 - Please provide the code in a publicly accessible git repository.
 
 # Live Demo
-SPA: https://test.justagency.de/
+SPA: https://justagency.de/
 
-static image: https://test.justagency.de/static/handsomeguy.png
+static image: https://justagency.de/static/handsomeguy.png
 
 # Requirements
 
@@ -38,6 +38,10 @@ See ./main.tf for example usage.
 ## Apply Changes
 `$ terraform apply`
 
+## Upload files (example)
+- Create folder 'static' in static bucket and upload files from ./testfiles/static
+- Upload files from ./testfiles/webapp/dist/webapp
+
 ## Configure NS Records
 - You need to configure NS records for your domain. 
 https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/SOA-NSrecords.html
@@ -46,16 +50,22 @@ https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/SOA-NSrecords.html
 `$ terraform destroy`
 
 # Testing
+I've used terratest for testing (https://terratest.gruntwork.io/)
 `$ cd test`
 `$ go test -v -timeout 30m`
 
 # Notes
-I used an domain "justagency.de" which I had already purchased in past. 
-I would highly recommend to use an exsisting hosted zone within a module and keep generation of hosted zones isolated, because they need longer provisioning time due to DNS propagination.
+I used my domain "justagency.de" which I had already purchased in past. 
+I would highly recommend to pass hosted zone as a parameter to keep generation of hosted zones isolated. So we have more control of it. Due to DNS propagination they need longer time to provision.
 
 I've added /dist folder of the angular SPA application. This is just for demo purpose, so you guys won't need to install nodejs and build it.
 
-Due to lack of time I couldn't manage to setup proper tests. I hope I gave you 
+Due to lack of time I couldn't manage to setup proper tests. I hope I gave you an expression what I've tried to achieve. 
+
+# Possible Improvements
+- Add more tests
+- Tests basic authentication and WAF rules
+- Pass more parameters like lambda function name, tags etc... 
 
 # Hosting Module Description
 

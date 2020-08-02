@@ -68,7 +68,7 @@ EOF
 }
 
 resource "aws_lambda_function" "lambda_edge" {
-  function_name    = "edge_basic_auth_guard_function"
+  function_name    = "edge_basic_auth_guard"
   handler          = "main.handler"
   runtime          = "nodejs12.x"
   role             = aws_iam_role.lambda_edge_exec.arn
