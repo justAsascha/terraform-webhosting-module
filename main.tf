@@ -42,10 +42,10 @@ resource "aws_acm_certificate_validation" "cert" {
 # DEMO SHOWCASE #
 #################
 module "hosting" {
-  source       = "./modules/hosting"
-  region       = "eu-west-1"
+  source = "./modules/hosting"
+  region = "eu-west-1"
 
-  static_content_bucket_name = "epilot-statics-demo"
+  static_content_bucket_name = "epilot-static-demo"
   webapp_bucket_name         = "epilot-webapp-demo"
 
   hosted_zone            = "justagency.de."

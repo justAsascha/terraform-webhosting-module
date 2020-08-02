@@ -74,7 +74,7 @@ resource "aws_cloudfront_distribution" "hosting" {
   }
 
   ordered_cache_behavior {
-    path_pattern     = "/statics/*"
+    path_pattern     = "/static/*"
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = local.static_s3_origin_id

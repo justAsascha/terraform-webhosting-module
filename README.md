@@ -18,7 +18,7 @@ The module should:
 # Live Demo
 SPA: https://test.justagency.de/
 
-static image: https://test.justagency.de/statics/handsomeguy.png
+static image: https://test.justagency.de/static/handsomeguy.png
 
 # How To Run
 
