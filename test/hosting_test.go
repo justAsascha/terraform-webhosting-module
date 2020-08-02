@@ -25,8 +25,8 @@ func TestHostingModule(t *testing.T) {
 			"region":                     "eu-west-1",
 			"static_content_bucket_name": "epilot-static-test",
 			"webapp_bucket_name":         "epilot-webapp-test",
-			"hosted_zone":                "justagency.de.",
-			"dns_address":                "justagency.de",
+			"hosted_zone":                "yourdomain.tld.",
+			"dns_address":                "yourdomain.tld",
 			"cloudfront_price_class":     "PriceClass_100",
 			"acm_certificate_arn":        "xxxxxxx",
 			"basic_auth_username":        "demo",
@@ -56,7 +56,7 @@ func TestHostingModule(t *testing.T) {
 	// TODO: file upload test webapp & static files
 	// TODO: test basic authentication
 	// // Run `terraform output` to get the value of an output variable
-	// instanceURL := "https://justagency.de"
+	// instanceURL := "https://yourdomain.tld"
 
 	// // Setup a TLS configuration to submit with the helper, a blank struct is acceptable
 	// tlsConfig := tls.Config{}

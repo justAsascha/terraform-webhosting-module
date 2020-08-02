@@ -18,7 +18,7 @@ provider "aws" {
 #################
 # resource "aws_acm_certificate" "certificate" {
 #   provider          = aws.useast1
-#   domain_name       = "justagency.de"
+#   domain_name       = "yourdomain.tld"
 #   validation_method = "DNS"
 # }
 
