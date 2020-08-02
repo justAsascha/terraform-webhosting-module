@@ -53,6 +53,7 @@ func TestHostingModule(t *testing.T) {
 	assert.NotEmpty(t, staticS3Arn)
 	assert.NotEmpty(t, hostedZoneID)
 
+	// TODO: file upload test webapp & static files
 	// TODO: test basic authentication
 	// // Run `terraform output` to get the value of an output variable
 	// instanceURL := "https://justagency.de"

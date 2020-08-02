@@ -67,11 +67,18 @@ EOF
   }
 }
 
+resource "random_pet" "function" {
+  keepers = {
+    # Generate a new pet name each time we switch to a new function role arn
+    function_role_arn = aws_iam_role.lambda_edge_exec.arn
+  }
+}
+
 resource "aws_lambda_function" "lambda_edge" {
-  function_name    = "edge_basic_auth_guard"
+  function_name    = "edge_basic_auth_guard_${random_pet.function.id}"
   handler          = "main.handler"
   runtime          = "nodejs12.x"
-  role             = aws_iam_role.lambda_edge_exec.arn
+  role             = random_pet.function.keepers.function_role_arn
   filename         = data.archive_file.lambda_zip_inline.output_path
   source_code_hash = data.archive_file.lambda_zip_inline.output_base64sha256
   provider         = aws.useast1

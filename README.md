@@ -56,16 +56,11 @@ I've used terratest for testing (https://terratest.gruntwork.io/)
 
 # Notes
 I used my domain "justagency.de" which I had already purchased in past. 
-I would highly recommend to pass hosted zone as a parameter to keep generation of hosted zones isolated. So we have more control of it. Due to DNS propagination they need longer time to provision.
+I would highly recommend to pass hosted zone as a parameter to keep generation of hosted zones isolated. So we have more control of services which longer provisioning time.
 
 I've added /dist folder of the angular SPA application. This is just for demo purpose, so you guys won't need to install nodejs and build it.
 
 Due to lack of time I couldn't manage to setup proper tests. I hope I gave you an expression what I've tried to achieve. 
-
-# Possible Improvements
-- Add more tests
-- Tests basic authentication and WAF rules
-- Pass more parameters like lambda function name, tags etc... 
 
 # Hosting Module Description
 
