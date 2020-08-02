@@ -5,6 +5,7 @@ locals {
   cf_waf_name = "allowlistSpecifIps"
 }
 
+# creates ipsets for each allowed cdir 
 resource "aws_waf_ipset" "ipset" {
   name = "tfIPSet"
   dynamic "ip_set_descriptors" {

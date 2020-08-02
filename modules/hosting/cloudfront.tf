@@ -31,6 +31,7 @@ resource "aws_cloudfront_distribution" "hosting" {
     }
   }
 
+  # public dns address
   aliases = [var.dns_address]
 
   enabled             = true
@@ -38,6 +39,7 @@ resource "aws_cloudfront_distribution" "hosting" {
   default_root_object = "index.html"
   price_class         = var.cloudfront_price_class
 
+  # protect cloudfront by WAF rules
   web_acl_id = aws_waf_web_acl.waf_acl.id
 
   restrictions {
@@ -46,26 +48,26 @@ resource "aws_cloudfront_distribution" "hosting" {
     }
   }
 
+  # single page application 
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = local.webapp_s3_origin_id
 
+    # enforece https 
     viewer_protocol_policy = "redirect-to-https"
 
     forwarded_values {
       query_string = true
-      headers = [
-        "Origin",
-        "Access-Control-Request-Headers",
-        "Access-Control-Request-Method",
-        "Authorization",
-      ]
+      # basic authentication requires Authorization header
+      headers = ["Authorization"]
+
       cookies {
-        forward = "none"
+        forward = "all"
       }
     }
 
+    # protected by lambda function to ensure basic authentication 
     lambda_function_association {
       event_type   = "origin-request"
       lambda_arn   = aws_lambda_function.lambda_edge.qualified_arn
@@ -73,12 +75,15 @@ resource "aws_cloudfront_distribution" "hosting" {
     }
   }
 
+  # static files
   ordered_cache_behavior {
+    # static files are accessible from /static/* path
     path_pattern     = "/static/*"
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = local.static_s3_origin_id
 
+    # enforce https
     viewer_protocol_policy = "redirect-to-https"
 
     forwarded_values {
@@ -90,6 +95,7 @@ resource "aws_cloudfront_distribution" "hosting" {
     }
   }
 
+  # attach TLS certificate
   viewer_certificate {
     acm_certificate_arn      = var.acm_certificate_arn
     minimum_protocol_version = "TLSv1"

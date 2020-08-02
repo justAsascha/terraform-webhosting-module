@@ -15,15 +15,6 @@ The module should:
 - Testing is encouraged.
 - Please provide the code in a publicly accessible git repository.
 
-# Live Demo
-SPA: https://justagency.de/
-
-static image: https://justagency.de/static/handsomeguy.png
-
-Username: `demo`
-
-Password: `secret` 
-
 # Requirements
 
 - Go (requires version >=1.13) for terratest
@@ -61,7 +52,6 @@ I've used terratest for testing (https://terratest.gruntwork.io/)
 `$ go test -v -timeout 30m`
 
 # Notes
-I used my domain "justagency.de" which I had already purchased in past. 
 I would highly recommend to pass hosted zone as a parameter to keep generation of hosted zones isolated. So we have more control of services with longer provisioning time.
 
 I've added /dist folder of the angular SPA application. This is just for demo purpose, so you guys won't need to install nodejs and build it.

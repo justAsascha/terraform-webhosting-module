@@ -48,16 +48,17 @@ module "hosting" {
   static_content_bucket_name = "epilot-static-demo"
   webapp_bucket_name         = "epilot-webapp-demo"
 
-  hosted_zone            = "justagency.de."
-  dns_address            = "justagency.de"
+  hosted_zone            = "yourdomain.tld."
+  dns_address            = "yourdomain.tld"
   cloudfront_price_class = "PriceClass_100"
-  acm_certificate_arn    = "arn:aws:acm:us-east-1:xxxxxxx:certificate/xxxxxxxx"
+  acm_certificate_arn    = "xxxxxxxxxxxxxxx"
 
   basic_auth_username = "demo"
   basic_auth_password = "secret"
 
   allowlist_cdirs = [
-    { value = "5.146.105.103/32", type = "IPV4" },
+    { value = "100.100.100.100/32", type = "IPV4" },
+    { value = "100.100.100.101/32", type = "IPV4" },
   ]
 }
 

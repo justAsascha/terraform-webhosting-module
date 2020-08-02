@@ -1,7 +1,11 @@
+############
+# Route 53 #
+############
 resource "aws_route53_zone" "primary" {
   name = var.hosted_zone
 }
 
+# A-Record to CloudFront
 resource "aws_route53_record" "hosting" {
   zone_id = aws_route53_zone.primary.id
   name    = var.dns_address

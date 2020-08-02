@@ -20,6 +20,8 @@ EOF
 
 # we need inline code, because environment  
 # variables are not supported for lamba@edge
+# This lambda functions returns 401 Unauthorized if 
+# basic auth header is not given.
 data "archive_file" "lambda_zip_inline" {
   type        = "zip"
   output_path = "/tmp/lambda_zip_inline.zip"

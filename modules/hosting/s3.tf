@@ -1,6 +1,7 @@
 ##############################
 # S3 Bucket for static files #
 ##############################
+# Allow read access only from given CloudFront distribution
 data "aws_iam_policy_document" "static_bucket_policy" {
   statement {
     actions   = ["s3:GetObject"]
@@ -40,6 +41,7 @@ module "static_content_s3" {
 #################################
 # S3 Bucket for single page app #
 #################################
+# Allow read access only from given CloudFront distribution
 data "aws_iam_policy_document" "webapp_bucket_policy" {
   statement {
     actions   = ["s3:GetObject"]
@@ -71,6 +73,8 @@ module "webapp_s3" {
   attach_policy = true
   policy        = data.aws_iam_policy_document.webapp_bucket_policy.json
 
+  # SPA applications requires error_document = index.html,
+  # because they handle errors on their own.
   website = {
     index_document = "index.html"
     error_document = "index.html"
