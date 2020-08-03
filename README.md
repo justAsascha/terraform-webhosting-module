@@ -24,6 +24,31 @@ The module should:
 # How To Run
 See ./main.tf for example usage.
 
+Example:
+
+```
+module "hosting" {
+  source = "./modules/hosting"
+  region = "eu-west-1"
+
+  static_content_bucket_name = "epilot-static-demo"
+  webapp_bucket_name         = "epilot-webapp-demo"
+
+  hosted_zone            = "yourdomain.tld."
+  dns_address            = "yourdomain.tld"
+  cloudfront_price_class = "PriceClass_100"
+  acm_certificate_arn    = "xxxxxxxxxxxxxxx"
+
+  basic_auth_username = "demo"
+  basic_auth_password = "secret"
+
+  allowlist_cdirs = [
+    { value = "100.100.100.100/32", type = "IPV4" },
+    { value = "100.100.100.101/32", type = "IPV4" },
+  ]
+}
+```
+
 ## Init Terraform Modules
 `$ terraform init` 
 
@@ -35,7 +60,7 @@ See ./main.tf for example usage.
 
 ## Upload files (example)
 - Create folder 'static' in static bucket and upload files from ./testfiles/static
-- Upload files from ./testfiles/webapp/dist/webapp
+- Upload files from ./testfiles/webapp/dist/webapp to webapp s3 bucket.
 
 ## Configure NS Records
 - You need to configure NS records for your domain. 
@@ -52,7 +77,7 @@ I've used terratest for testing (https://terratest.gruntwork.io/)
 `$ go test -v -timeout 30m`
 
 # Notes
-I would highly recommend to pass hosted zone as a parameter to keep generation of hosted zones isolated. So we have more control of services with longer provisioning time.
+I would highly recommend to pass hosted zone as a parameter to keep generation of hosted zones isolated. So we have more control of services with longer provisioning time (due to DNS propagation).
 
 I've added /dist folder of the angular SPA application. This is just for demo purpose, so you guys won't need to install nodejs and build it.
 
