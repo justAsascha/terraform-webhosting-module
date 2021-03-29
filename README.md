@@ -1,15 +1,15 @@
-# Challenge Description
+# Webhosting Module
 
-Write a terraform module to distribute static content from one bucket for /static/ paths, and as default to serve a simple 'hello-world' javascript SPA application from a different bucket. Make sure that the distribution is only accessible for certain IP ranges.
+Tterraform module to distribute static content from one bucket for /static/ paths, and as default to serve a simple 'hello-world' javascript SPA application from a different bucket. Distribution is only accessible for certain IP ranges.
 
-The module should:
+The module:
 - take the ARN of an ACM certificate as a parameter.
 - create the necessary S3 bucket with best practices configuration.
 - create route53 HostedZone.
 - create CloudFront web distribution.
 - create relevant DNS entries pointing to the distribution.
 - IP protection implemented as desired.
-- (Bonus): implement basic authentication protection for the distribution. (Can be a static username + password)
+- implements basic authentication protection for the distribution. (Can be a static username + password)
 
 - Please document the functionality and how to run the application to the best of your ability in the README.md.
 - Testing is encouraged.
@@ -69,19 +69,9 @@ https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/SOA-NSrecords.html
 ## Clean Environment
 `$ terraform destroy`
 
-# Testing
-I've used terratest for testing (https://terratest.gruntwork.io/)
-
 `$ cd test`
 
 `$ go test -v -timeout 30m`
-
-# Notes
-I would highly recommend to pass hosted zone as a parameter to keep generation of hosted zones isolated. So we have more control of services with longer provisioning time (due to DNS propagation).
-
-I've added /dist folder of the angular SPA application. This is just for demo purpose, so you guys won't need to install nodejs and build it.
-
-Due to lack of time I couldn't manage to setup proper tests. I hope I gave you an expression what I've tried to achieve. 
 
 # Hosting Module Description
 
